@@ -1,0 +1,74 @@
+*{
+    font-size: medium;
+}
+
+.navbar {
+    margin-bottom: 0;
+    border-radius: 0;
+}
+
+.navbar-brand{
+    height: 50px;
+    width: auto;
+    padding: 0 20px;
+}
+
+.navbar-nav li{
+    font-size: large;
+}
+
+/* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+
+/* Set gray background color and 100% height*/
+.sidenav {
+    padding-top: 20px;
+    /*background-color: #f1f1f1;*/
+    height: 100%;
+}
+
+.sidemenu li{
+    background-color: #f1f1f1;
+    text-decoration: none;
+    color: #555555;
+}
+
+.sidemenu li a{
+    text-decoration: none;
+    color: #555555;
+    font-size: medium;
+}
+
+.sidemenu li a:hover{
+    text-decoration: none;
+    color: grey;
+}
+
+.row .content{
+    height: 100%;
+}
+
+.logo{
+    height: 50px;
+    width: auto;
+}
+
+/* Set black background color, white text and some padding */
+footer {
+    background-color: #555;
+    color: white;
+    padding: 15px;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+}
+
+/* On small screens, set height to 'auto' for sidenav and grid */
+@media screen and (max-width: 767px) {
+    .sidenav {
+        height: auto;
+        padding: 15px;
+    }
+    .row.content {height:auto;}
+}
