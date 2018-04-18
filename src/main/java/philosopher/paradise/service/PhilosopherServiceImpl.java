@@ -52,10 +52,6 @@ public class PhilosopherServiceImpl implements PhilosopherService {
         return philosopherSet;
     }
 
-    public Philosopher addPhilosopher(Philosopher philosopher){
-        return repo.save(philosopher);
-    }
-
     public Philosopher editPhilosopher(Long id, String description){
         Philosopher toEdit = findById(id);
         toEdit.setDescription(description);

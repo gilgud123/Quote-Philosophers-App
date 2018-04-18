@@ -28,12 +28,9 @@ public class Quote {
     @JoinColumn(name = "PHILOSOPHER_ID")
     private Philosopher philosopher;
 
-    public Quote() {
-        this.id = new Random().nextLong();
-    }
+    public Quote() {}
 
     public Quote(String text, Set<Topic> topics, Philosopher philosopher) {
-        this();
         this.text = text;
         this.topics = topics;
         this.philosopher = philosopher;

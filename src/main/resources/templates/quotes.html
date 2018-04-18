@@ -54,10 +54,10 @@
         </div>
         <div class="col-sm-8 text-left">
             <h1>All Quotes Alphabetically</h1>
-            <p>Not enough? <a href="#" th:href="@{'/quotes/quote'}"> Add a quote!</a></p>
+            <p>Not enough? <a href="/quoteAdd" th:href="@{/quoteAdd}"> Add a quote!</a></p>
             <hr>
             <ul class="list-group list-group-flush" th:each="quote : ${quotes}">
-                <li><span th:text="${quote.getText()}">Quote</span> | <a href="/quoteDelete/1" th:href="@{/quoteDelete/__${quote.id}__}">Delete</a></li>
+                <li><span th:text="${quote.getText()}">Quote</span> | <a href="/quoteDelete/1" th:href="@{/quoteDelete/__${quote.id}__}">Delete</a> | <a href="/quoteEdit/1" th:href="@{/quoteEdit/__${quote.id}__}">Edit</a></li>
             </ul>
         </div>
         <div class="col-sm-2 sidenav">

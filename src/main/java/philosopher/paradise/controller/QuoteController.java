@@ -8,15 +8,17 @@ import philosopher.paradise.dto.QuoteDTO;
 import philosopher.paradise.entity.Category;
 import philosopher.paradise.entity.Quote;
 import philosopher.paradise.entity.Topic;
+import philosopher.paradise.service.PhilosopherServiceImpl;
 import philosopher.paradise.service.QuoteServiceImpl;
 import philosopher.paradise.service.TopicServiceImpl;
+
+import java.util.Random;
 
 @Controller
 public class QuoteController {
 
-    private QuoteServiceImpl service;
+    private final QuoteServiceImpl service;
     private final TopicServiceImpl topicService;
-
 
     @Autowired
     public QuoteController(QuoteServiceImpl service, TopicServiceImpl topicService) {
@@ -49,18 +51,45 @@ public class QuoteController {
         return "philosopher_quotes";
     }
 
-    @PostMapping("/quotes/quote")
-    public String addQuote(@ModelAttribute QuoteDTO dto, Model model){
-        QuoteDTO dtoToAdd = service.createQuote(dto);
-        model.addAttribute("topics", topicService.getTopics());
+    @GetMapping({"/quoteAdd"})
+    public String quoteAdd(Model model) {
+        Quote quote = new Quote();
+        quote.setId(new Random().nextLong()+20015);
+        model.addAttribute("quote", quote);
         model.addAttribute("categories", Category.values());
+        model.addAttribute("topics", topicService.getTopics());
         return "quote";
     }
 
-    @PutMapping("/quotes/{id}")
-    public String updateQuote(@PathVariable(value="id") Long id, @RequestBody String text, Model model){
+    @PostMapping("/quoteAdd")
+    public String addQuote(Model model, Quote quote) {
+        service.createQuote(quote);
+        model.addAttribute("quotes", service.getQuotes());
+        model.addAttribute("quote", service.getQuoteById(quote.getId()));
+        //model.addAttribute("philosopher", service.getQuoteById(id).getPhilosopher());
+        model.addAttribute("categories", Category.values());
+        model.addAttribute("topics", topicService.getTopics());
+        return "redirect:/quotes";
+    }
+
+    @GetMapping({"/quoteEdit","/quoteEdit/{id}"})
+    public String quoteEditForm(Model model, @PathVariable(required = false, name = "id") Long id) {
+        model.addAttribute("quote", service.getQuoteById(id));
+        model.addAttribute("categories", Category.values());
+        model.addAttribute("topics", topicService.getTopics());
+        model.addAttribute("quote", service.getQuoteById(id));
+        return "quoteForm";
+    }
+
+    @PostMapping("/quoteEdit")
+    public String quoteEdit(Model model, Long id, String text) {
         service.updateQuote(id, text);
-        return "/quotes";
+        model.addAttribute("quotes", service.getQuotes());
+        model.addAttribute("quote", service.getQuoteById(id));
+        model.addAttribute("philosopher", service.getQuoteById(id).getPhilosopher());
+        model.addAttribute("categories", Category.values());
+        model.addAttribute("topics", topicService.getTopics());
+        return "redirect:/quotes";
     }
 
     @GetMapping("/quoteDelete/{id}")

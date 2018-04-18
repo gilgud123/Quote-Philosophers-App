@@ -19,7 +19,7 @@ public interface QuoteService {
 
     Quote getRandomQuote();
 
-    QuoteDTO createQuote(QuoteDTO dto);
+    Quote createQuote(Quote quote);
 
     Quote updateQuote(Long is, String text);
 

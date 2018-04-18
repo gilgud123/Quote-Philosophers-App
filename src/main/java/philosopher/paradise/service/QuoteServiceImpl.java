@@ -53,20 +53,18 @@ public class QuoteServiceImpl implements QuoteService {
 
     @Override
     @Transactional
-    public QuoteDTO createQuote(QuoteDTO dto) {
-        Quote quote = new Quote();
-
-        Optional<Philosopher> p = pRepo.findByName(dto.getPhilosopherName());
+    public Quote createQuote(Quote quote) {
+       /* Optional<Philosopher> p = pRepo.findByName(quote.getPhilosopher().getName());
         if(!p.isPresent()){
             throw  new RuntimeException("Philosopher does not exist in our database!");
-        }
+        }*/
 
-        quote.setText(dto.getText());
-        quote.setPhilosopher(p.get());
-        quote.setTopics(dto.getTopics());
+        quote.setText(quote.getText());
+        //quote.setPhilosopher(p.get());
+        //quote.setTopics(quote.getTopics());
         repo.save(quote);
 
-        return dto;
+        return quote;
     }
 
     /*@Override

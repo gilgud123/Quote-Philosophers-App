@@ -59,7 +59,7 @@
             <form class="form-group" action="/philosopherEdit" th:action="@{/philosopherEdit}" method="post">
                 <input th:type="hidden" name="id" th:field="${philosopher.id}" />
                 <div class="form-group">
-                    <label for="description">Description</label>
+                    <label for="description">Edit philosopher description</label>
                     <input type="text" class="form-control" id="description" th:field="${philosopher.description}" />
                 </div>
                 <button type="submit" class="btn btn-primary">Save</button>
