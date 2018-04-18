@@ -48,22 +48,24 @@
     <div class="row content">
         <div class="col-sm-2 sidenav" th:if="${not #lists.isEmpty(topics)}">
             <h3>Choose by topic</h3>
-            <ul class="list-group list-group-flush sidemenu" th:each="t : ${topics}">
-                <li class="list-group-item"><a href="#" th:href="@{'/topics/' + ${t.getId()}}"><span th:text="${t.getText()}">Topic</span></a></li>
+            <ul class="list-group list-group-flush sidemenu" th:each="topic : ${topics}">
+                <li class="list-group-item"><a href="#" th:href="@{'/topics/' + ${topic.getId()}}"><span th:text="${topic.getText()}">Topic</span></a></li>
             </ul>
         </div>
-        <div class="col-sm-8 text-left" th:if="${not #lists.isEmpty(philosophers)}">
-            <h1> All Philosopher for Category: <span th:text="${category.name()}">Category</span></h1>
+        <div class="col-sm-8 text-left">
+            <h1>Edit philosopher</h1>
             <hr>
-            <ul class="list-group list-group-flush" th:each="philosopher : ${philosophers}">
-                <li><a href="#" th:href="@{'../philosophers/' + ${philosopher.getId()}}"><span th:text="${philosopher.getName()}">Quote</span></a></li>
-            </ul>
-        </div>
-        <div class="col-sm-2 sidenav">
-            <h3>Choose by category</h3>
-            <ul class="list-group list-group-flush sidemenu" th:each="category : ${categories}">
-                <li class="list-group-item"><a href="#" th:href="@{'/categories/' + ${category.name()}}"><span class="text-lowercase" th:text="${category.name()}">Category</span></a></li>
-            </ul>
+            <h1 class="large" th:text="${philosopher.getName()}">Name</h1>
+            <form class="form-group" action="/philosopherEdit" th:action="@{/philosopherEdit}" method="post">
+                <input th:type="hidden" name="id" th:field="${philosopher.id}" />
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <input type="text" class="form-control" id="description" th:field="${philosopher.description}" />
+                </div>
+                <button type="submit" class="btn btn-primary">Save</button>
+                <a href="#" th:href="@{/philosophers}" class="btn btn-danger" role="button">Cancel</a>
+            </form>
+
         </div>
     </div>
 </div>

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 import philosopher.paradise.entity.Category;
 import philosopher.paradise.entity.Philosopher;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 public interface PhilosopherRepository extends CrudRepository<Philosopher, Long> {
@@ -13,5 +14,9 @@ public interface PhilosopherRepository extends CrudRepository<Philosopher, Long>
 
     Set<Philosopher> findByCategories(Category category);
 
-    Set<Philosopher> findByName(String name);
+    Optional<Philosopher> findById(Long id);
+
+    Optional<Philosopher> findByName(String name);
+
+    void deleteById(Long id);
 }

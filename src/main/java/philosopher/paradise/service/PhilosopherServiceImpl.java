@@ -1,8 +1,10 @@
 package philosopher.paradise.service;
 
+import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import philosopher.paradise.dto.PhilosopherDTO;
 import philosopher.paradise.entity.Category;
 import philosopher.paradise.entity.Philosopher;
 import philosopher.paradise.entity.Quote;
@@ -45,8 +47,25 @@ public class PhilosopherServiceImpl implements PhilosopherService {
     @Override
     public Set<Philosopher> getPhilosopherByCategory(String category){
         Category categoryToMatch = Category.valueOf(category);
-        Set<Philosopher> philosopherList = new HashSet<>();
-        repo.findByCategories(categoryToMatch).iterator().forEachRemaining(philosopherList::add);
-        return philosopherList;
+        Set<Philosopher> philosopherSet = new HashSet<>();
+        repo.findByCategories(categoryToMatch).iterator().forEachRemaining(philosopherSet::add);
+        return philosopherSet;
     }
+
+    public Philosopher addPhilosopher(Philosopher philosopher){
+        return repo.save(philosopher);
+    }
+
+    public Philosopher editPhilosopher(Long id, String description){
+        Philosopher toEdit = findById(id);
+        toEdit.setDescription(description);
+        return repo.save(toEdit);
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        repo.deleteById(id);
+    }
+
+
 }

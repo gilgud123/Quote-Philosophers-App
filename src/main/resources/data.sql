@@ -35,7 +35,6 @@ INSERT INTO categories(philosopher_id, category_id) VALUES (20010, 'EPISTEMOLOGY
 INSERT INTO categories(philosopher_id, category_id) VALUES (20010, 'ETHICS');
 INSERT INTO categories(philosopher_id, category_id) VALUES (20011, 'EPISTEMOLOGY');
 INSERT INTO categories(philosopher_id, category_id) VALUES (20011, 'ETHICS');
-INSERT INTO categories(philosopher_id, category_id) VALUES (20011, 'THEOLOGY');
 INSERT INTO categories(philosopher_id, category_id) VALUES (20011, 'POLITICS');
 INSERT INTO categories(philosopher_id, category_id) VALUES (20012, 'EPISTEMOLOGY');
 INSERT INTO categories(philosopher_id, category_id) VALUES (20012, 'POLITICS');

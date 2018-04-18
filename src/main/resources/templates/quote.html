@@ -32,10 +32,10 @@
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="../index">Home</a></li>
-                <li><a href="../philosophers">Philosophers</a></li>
-                <li><a href="../quotes">Quotes</a></li>
-                <li><a href="../contact">Contact</a></li>
+                <li class="active"><a href="index">Home</a></li>
+                <li><a href="philosophers">Philosophers</a></li>
+                <li><a href="quotes">Quotes</a></li>
+                <li><a href="contact">Contact</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
@@ -46,25 +46,30 @@
 
 <div class="container-fluid text-center">
     <div class="row content">
-        <div class="col-sm-2 sidenav" th:if="${not #lists.isEmpty(topics)}">
+        <!--<div class="col-sm-2 sidenav" th:if="${not #lists.isEmpty(topics)}">
             <h3>Choose by topic</h3>
-            <ul class="list-group list-group-flush sidemenu" th:each="t : ${topics}">
-                <li class="list-group-item"><a href="#" th:href="@{'/topics/' + ${t.getId()}}"><span th:text="${t.getText()}">Topic</span></a></li>
+            <ul class="list-group list-group-flush sidemenu" th:each="topic : ${topics}">
+                <li class="list-group-item"><a href="#" th:href="@{'/topics/' + ${topic.getId()}}"><span th:text="${topic.getText()}">Topic</span></a></li>
             </ul>
-        </div>
-        <div class="col-sm-8 text-left" th:if="${not #lists.isEmpty(philosophers)}">
-            <h1> All Philosopher for Category: <span th:text="${category.name()}">Category</span></h1>
+        </div>-->
+        <div class="col-sm-8 text-left">
+            <h1>Add a quote here!</h1>
+            <p>Keep philosophy fun!</p>
             <hr>
-            <ul class="list-group list-group-flush" th:each="philosopher : ${philosophers}">
-                <li><a href="#" th:href="@{'../philosophers/' + ${philosopher.getId()}}"><span th:text="${philosopher.getName()}">Quote</span></a></li>
-            </ul>
+           <form action="#" th:action="@{/quotes/quote}" th:object="${dto}" method="post">
+               <!--<input type="hidden" th:field="*{id}"/>-->
+                <p>Text: <input type="text" th:field="*{text}" /></p>
+                <!--<p>Topic: <input type="text" th:field="*{getTopics()}" /></p>-->
+                <p>Philosopher: <input type="text" th:field="*{philosopherName}" /></p>
+                <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+            </form>
         </div>
-        <div class="col-sm-2 sidenav">
+        <!--<div class="col-sm-2 sidenav">
             <h3>Choose by category</h3>
             <ul class="list-group list-group-flush sidemenu" th:each="category : ${categories}">
-                <li class="list-group-item"><a href="#" th:href="@{'/categories/' + ${category.name()}}"><span class="text-lowercase" th:text="${category.name()}">Category</span></a></li>
+                <li class="list-group-item"><a href="#" th:href="@{'../categories/' + ${category.name()}}"><span class="text-lowercase" th:text="${category.name()}">Category</span></a></li>
             </ul>
-        </div>
+        </div>-->
     </div>
 </div>
 

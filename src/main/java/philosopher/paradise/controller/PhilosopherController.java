@@ -4,11 +4,11 @@ import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import philosopher.paradise.dto.PhilosopherDTO;
 import philosopher.paradise.entity.Category;
+import philosopher.paradise.entity.Philosopher;
+import philosopher.paradise.entity.Quote;
 import philosopher.paradise.service.PhilosopherServiceImpl;
 import philosopher.paradise.service.QuoteServiceImpl;
 import philosopher.paradise.service.TopicServiceImpl;
@@ -73,5 +73,27 @@ public class PhilosopherController {
         model.addAttribute("categories", Category.values());
         model.addAttribute("topics", topicService.getTopics());
         return "contact";
+    }
+
+    @GetMapping({"/philosopherEdit","/philosopherEdit/{id}"})
+    public String philosopherEditForm(Model model, @PathVariable(required = false, name = "id") Long id) {
+        if (null != id) {
+            model.addAttribute("philosopher", service.findById(id));
+        } else {
+            model.addAttribute("philosopher", new Philosopher());
+        }
+        model.addAttribute("categories", Category.values());
+        model.addAttribute("topics", topicService.getTopics());
+        model.addAttribute("philosopher", service.findById(id));
+        return "form";
+    }
+
+    @PostMapping("/philosopherEdit")
+    public String philosopherEdit(Model model, Long id, String description) {
+        service.editPhilosopher(id, description);
+        model.addAttribute("philosophers", service.getPhilosophers());
+        model.addAttribute("categories", Category.values());
+        model.addAttribute("topics", topicService.getTopics());
+        return "redirect:/philosophers";
     }
 }

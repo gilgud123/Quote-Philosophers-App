@@ -5,12 +5,17 @@
     <title>Philosopher's Paradise</title>
 
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"
+          th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}">
     <link rel="stylesheet" href="../static/css/styles.css" th:href="@{/css/styles.css}">
 
+    <script src="/webjars/jquery/1.11.1/jquery.min.js"></script>
+
     <!-- Latest compiled and minified JavaScript -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous" th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
 
 </head>
 
@@ -50,6 +55,7 @@
         <div class="col-sm-8 text-left">
             <h1>Welcome to the Philosopher Quote Repository website</h1>
             <p>Read something about philosophers here.</p>
+            <hr>
 
             <div class="table-responsive" th:if="${not #lists.isEmpty(philosophers)}">
                 <table class="table table-hover">
@@ -62,6 +68,7 @@
                     <tr th:each="philosopher : ${philosophers}">
                         <td scope="col"><a href="#" th:href="@{'/philosophers/' + ${philosopher.getId()}}"><span th:text="${philosopher.getName()}">Name</span></a></td>
                         <td scope="col"><span th:each="category : ${philosopher.getCategories()}"><span th:text="${category.name()}"> category</span> </span></td>
+                        <td scope="col"><a href="/philosopherEdit/1" th:href="@{/philosopherEdit/__${philosopher.id}__}">Edit</a></td>
                     </tr>
                 </table>
             </div>

@@ -13,4 +13,8 @@ public interface QuoteRepository extends CrudRepository<Quote, Long>{
     Set<Quote> findByTopics(Topic topic);
 
     Set<Quote> findByPhilosopherId(Long id);
+
+    Optional<Quote> findById(Long id);
+
+    void deleteById(Long id);
 }

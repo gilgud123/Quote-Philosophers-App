@@ -5,12 +5,17 @@
     <title>Philosopher's Paradise</title>
 
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"
+          th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}">
     <link rel="stylesheet" href="../static/css/styles.css" th:href="@{/css/styles.css}">
 
+    <script src="/webjars/jquery/1.11.1/jquery.min.js"></script>
+
     <!-- Latest compiled and minified JavaScript -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous" th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
 
 </head>
 
@@ -49,9 +54,10 @@
         </div>
         <div class="col-sm-8 text-left">
             <h1>All Quotes Alphabetically</h1>
+            <p>Not enough? <a href="#" th:href="@{'/quotes/quote'}"> Add a quote!</a></p>
             <hr>
             <ul class="list-group list-group-flush" th:each="quote : ${quotes}">
-                <li th:text="${quote.getText()}">Quote</li>
+                <li><span th:text="${quote.getText()}">Quote</span> | <a href="/quoteDelete/1" th:href="@{/quoteDelete/__${quote.id}__}">Delete</a></li>
             </ul>
         </div>
         <div class="col-sm-2 sidenav">
