@@ -54,17 +54,7 @@ public class QuoteServiceImpl implements QuoteService {
     @Override
     @Transactional
     public Quote createQuote(Quote quote) {
-       /* Optional<Philosopher> p = pRepo.findByName(quote.getPhilosopher().getName());
-        if(!p.isPresent()){
-            throw  new RuntimeException("Philosopher does not exist in our database!");
-        }*/
-
-        quote.setText(quote.getText());
-        //quote.setPhilosopher(p.get());
-        //quote.setTopics(quote.getTopics());
-        repo.save(quote);
-
-        return quote;
+         return repo.save(quote);
     }
 
     /*@Override

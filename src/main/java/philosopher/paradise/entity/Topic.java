@@ -6,10 +6,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
-import java.util.UUID;
-import java.util.concurrent.ThreadLocalRandom;
 
 @Data
 @Entity
@@ -22,10 +21,10 @@ public class Topic {
     private String text;
 
     @ManyToMany
-    private Set<Quote> quotes;
+    private Set<Quote> quotes = new HashSet<>();
 
     private Topic(){
-        this.id = new Random().nextLong();
+        this.id = new Random().nextLong()+30008;
     }
 
     public Topic(String text, Set<Quote> quotes) {

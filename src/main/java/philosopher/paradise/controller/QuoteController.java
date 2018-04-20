@@ -19,11 +19,13 @@ public class QuoteController {
 
     private final QuoteServiceImpl service;
     private final TopicServiceImpl topicService;
+    private final PhilosopherServiceImpl philosopherService;
 
     @Autowired
-    public QuoteController(QuoteServiceImpl service, TopicServiceImpl topicService) {
+    public QuoteController(QuoteServiceImpl service, TopicServiceImpl topicService, PhilosopherServiceImpl philosopherService) {
         this.service = service;
         this.topicService = topicService;
+        this.philosopherService = philosopherService;
     }
 
     @GetMapping(path="/quotes")
@@ -58,6 +60,7 @@ public class QuoteController {
         model.addAttribute("quote", quote);
         model.addAttribute("categories", Category.values());
         model.addAttribute("topics", topicService.getTopics());
+        model.addAttribute("philosophers", philosopherService.getPhilosophers());
         return "quote";
     }
 
@@ -66,7 +69,6 @@ public class QuoteController {
         service.createQuote(quote);
         model.addAttribute("quotes", service.getQuotes());
         model.addAttribute("quote", service.getQuoteById(quote.getId()));
-        //model.addAttribute("philosopher", service.getQuoteById(id).getPhilosopher());
         model.addAttribute("categories", Category.values());
         model.addAttribute("topics", topicService.getTopics());
         return "redirect:/quotes";

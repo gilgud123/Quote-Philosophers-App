@@ -22,13 +22,13 @@ public class Philosopher {
             joinColumns = @JoinColumn(name = "philosopher_id"))
     @Enumerated(EnumType.STRING)
     @Column(name = "category_id")
-    private Set<Category> categories;
+    private Set<Category> categories = new HashSet<>();
 
     @Lob
     private String description;
 
     @OneToMany
-    private Set<Quote> quotes = new HashSet<>();
+    private Set<Quote> quotes;
 
     public Philosopher() {}
 

@@ -52,7 +52,7 @@
                 <li class="list-group-item"><a href="#" th:href="@{'/topics/' + ${topic.getId()}}"><span th:text="${topic.getText()}">Topic</span></a></li>
             </ul>
         </div>
-        <div class="col-sm-8 text-left">
+        <div class="col-sm-8 text-left quotes">
             <h1>All Quotes Alphabetically</h1>
             <p>Not enough? <a href="/quoteAdd" th:href="@{/quoteAdd}"> Add a quote!</a></p>
             <hr>
@@ -60,6 +60,7 @@
                 <li><span th:text="${quote.getText()}">Quote</span> | <a href="/quoteDelete/1" th:href="@{/quoteDelete/__${quote.id}__}">Delete</a> | <a href="/quoteEdit/1" th:href="@{/quoteEdit/__${quote.id}__}">Edit</a></li>
             </ul>
         </div>
+
         <div class="col-sm-2 sidenav">
             <h3>Choose by category</h3>
             <ul class="list-group list-group-flush sidemenu" th:each="category : ${categories}">
@@ -70,7 +71,7 @@
 </div>
 
 <footer class="container-fluid text-center">
-    <p>Footer Text</p>
+    <p>Author: Katya de Vries <span class="glyphicon glyphicon-copyright-mark"></span> 2018 <a href="https://www.jstack.eu/" target="_blank"><img class="logo-footer" alt="jstack.eu" src="../static/img/logo-stack.png" th:src="@{/img/logo-stack.png}"/></a></p>
 </footer>
 
 </body>

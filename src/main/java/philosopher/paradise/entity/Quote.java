@@ -12,7 +12,6 @@ import java.util.Set;
 public class Quote {
 
     @Id
-    @GeneratedValue
     private Long id;
 
     @Lob
@@ -28,9 +27,10 @@ public class Quote {
     @JoinColumn(name = "PHILOSOPHER_ID")
     private Philosopher philosopher;
 
-    public Quote() {}
+    public Quote() {this.id = new Random().nextLong()+10015;}
 
     public Quote(String text, Set<Topic> topics, Philosopher philosopher) {
+        this();
         this.text = text;
         this.topics = topics;
         this.philosopher = philosopher;

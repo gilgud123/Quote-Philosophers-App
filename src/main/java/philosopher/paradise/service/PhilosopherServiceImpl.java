@@ -45,6 +45,18 @@ public class PhilosopherServiceImpl implements PhilosopherService {
     }
 
     @Override
+    public Philosopher findByName(String name) {
+
+        Optional<Philosopher> philosopherOptional = repo.findByName(name);
+
+        if (!philosopherOptional.isPresent()) {
+            throw new RuntimeException("Philosopher Not Found!");
+        }
+
+        return philosopherOptional.get();
+    }
+
+    @Override
     public Set<Philosopher> getPhilosopherByCategory(String category){
         Category categoryToMatch = Category.valueOf(category);
         Set<Philosopher> philosopherSet = new HashSet<>();

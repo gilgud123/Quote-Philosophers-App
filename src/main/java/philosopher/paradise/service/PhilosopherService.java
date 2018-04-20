@@ -14,6 +14,8 @@ public interface PhilosopherService {
 
     Philosopher findById(Long id);
 
+    Philosopher findByName(String name);
+
     Set<Philosopher> getPhilosopherByCategory(String category);
 
     void deleteById(Long id);
