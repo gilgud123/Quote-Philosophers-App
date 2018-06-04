@@ -1,5 +1,6 @@
 package philosopher.paradise.controller;
 
+import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,9 +12,12 @@ import philosopher.paradise.entity.Topic;
 import philosopher.paradise.service.PhilosopherServiceImpl;
 import philosopher.paradise.service.QuoteServiceImpl;
 import philosopher.paradise.service.TopicServiceImpl;
+import springfox.documentation.annotations.ApiIgnore;
 
 import java.util.Random;
 
+//@Api(tags="Quote Controller", description = "allows to browse, select and sort the quotes database")
+@CrossOrigin
 @Controller
 public class QuoteController {
 
@@ -28,6 +32,7 @@ public class QuoteController {
         this.philosopherService = philosopherService;
     }
 
+    @ApiOperation(value="Returns the list of all quotes in the database", response = Iterable.class)
     @GetMapping(path="/quotes")
     public String getAllQuotes(Model model){
         model.addAttribute("quotes", service.getQuotes());
@@ -36,6 +41,7 @@ public class QuoteController {
         return "quotes";
     }
 
+    @ApiOperation(value="Returns the list of all quotes by a particular topic", response = Iterable.class)
     @GetMapping(path="/topics/{id}")
     public String getQuotesByTopic(@PathVariable(value="id") Long id, Model model){
         Topic topic = topicService.getTopicById(id);
@@ -46,6 +52,7 @@ public class QuoteController {
         return "topic";
     }
 
+    @ApiOperation(value="Returns the list of all quotes by a particular Philosopher", response = Iterable.class)
     @GetMapping({"/quotes/{id}"})
     public String getPhilosopherQuotes(@PathVariable(value="id") Long id, Model model){
         model.addAttribute("quotes", service.getQuotesByPhilosopherId(id));
@@ -53,6 +60,7 @@ public class QuoteController {
         return "philosopher_quotes";
     }
 
+    @ApiOperation(value="Returns the form page to add a new quote")
     @GetMapping({"/quoteAdd"})
     public String quoteAdd(Model model) {
         Quote quote = new Quote();
@@ -64,6 +72,7 @@ public class QuoteController {
         return "quote";
     }
 
+    @ApiOperation(value="Returns the updated list of quotes with the new quote added")
     @PostMapping("/quoteAdd")
     public String addQuote(Model model, Quote quote) {
         service.createQuote(quote);
@@ -94,6 +103,7 @@ public class QuoteController {
         return "redirect:/quotes";
     }
 
+    @ApiOperation(value="Deletes a quote")
     @GetMapping("/quoteDelete/{id}")
     public String deleteQuote(@PathVariable(required=true, name="id") Long id, Model model){
         service.deleteQuote(id);
