@@ -16,7 +16,7 @@ import springfox.documentation.annotations.ApiIgnore;
 
 import java.util.Random;
 
-//@Api(tags="Quote Controller", description = "allows to browse, select and sort the quotes database")
+@Api(tags="Quote Controller", description = "allows to browse, select and sort the quotes database")
 @CrossOrigin
 @Controller
 public class QuoteController {
@@ -72,7 +72,7 @@ public class QuoteController {
         return "quote";
     }
 
-    @ApiOperation(value="Returns the updated list of quotes with the new quote added")
+    @ApiIgnore
     @PostMapping("/quoteAdd")
     public String addQuote(Model model, Quote quote) {
         service.createQuote(quote);
