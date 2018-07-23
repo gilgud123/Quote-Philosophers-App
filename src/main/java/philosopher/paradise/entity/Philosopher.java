@@ -14,7 +14,7 @@ public class Philosopher {
 
     @Id
     @GeneratedValue
-    @ApiModelProperty(notes="The database generated product ID")
+    @ApiModelProperty(notes="The database generated philosopher ID")
     private Long id;
 
     @ApiModelProperty(notes="The philosopher's name")
