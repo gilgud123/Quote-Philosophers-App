@@ -57,7 +57,16 @@
             <p>Not enough? <a href="/quoteAdd" th:href="@{/quoteAdd}"> Add a quote!</a></p>
             <hr>
             <ul class="list-group list-group-flush" th:each="quote : ${quotes}">
-                <li><span th:text="${quote.getText()}">Quote</span> | <a href="/quoteDelete/1" th:href="@{/quoteDelete/__${quote.id}__}">Delete</a> | <a href="/quoteEdit/1" th:href="@{/quoteEdit/__${quote.id}__}">Edit</a></li>
+                <li>
+                    <span th:text="${quote.getText()}">Quote</span> |
+                    <a href="/quoteDelete/1" th:href="@{/quoteDelete/__${quote.id}__}">Delete</a> |
+                    <a href="/quoteEdit/1" th:href="@{/quoteEdit/__${quote.id}__}">Edit</a> |
+
+                    <a th:href="@{/quotes/indexQuote/{id}/(id = ${quote.id})}">Send emails through queue listener</a>
+
+                    <span th:text="${quote.isMessageReceived()}">Received</span> |
+                    <span th:text="${quote.getMessageCount()}">Count</span>
+                </li>
             </ul>
         </div>
 

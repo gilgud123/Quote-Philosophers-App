@@ -113,4 +113,9 @@ public class QuoteController {
         return "quotes";
     }
 
+    @RequestMapping("/quotes/indexQuote/{id}")
+    public String indexQuote(@PathVariable String id){
+        service.sendQuoteMessage(id);
+        return "redirect:/quotes/";
+    }
 }

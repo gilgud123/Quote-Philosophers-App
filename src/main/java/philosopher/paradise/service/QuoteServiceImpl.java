@@ -1,7 +1,11 @@
 package philosopher.paradise.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import philosopher.paradise.config.MessagingConfig;
 import philosopher.paradise.dto.QuoteDTO;
 import philosopher.paradise.entity.Philosopher;
 import philosopher.paradise.entity.Quote;
@@ -15,12 +19,16 @@ import java.util.stream.Collectors;
 @Service
 public class QuoteServiceImpl implements QuoteService {
 
+    private static final Logger logger = LoggerFactory.getLogger(QuoteServiceImpl.class);
+
     private QuoteRepository repo;
     private PhilosopherRepository pRepo;
+    private RabbitTemplate rabbitTemplate;
 
-    public QuoteServiceImpl(QuoteRepository repo, PhilosopherRepository pRepo) {
+    public QuoteServiceImpl(QuoteRepository repo, PhilosopherRepository pRepo, RabbitTemplate rabbitTemplate) {
         this.repo = repo;
         this.pRepo = pRepo;
+        this.rabbitTemplate = rabbitTemplate;
     }
 
     public Set<Quote> getQuotes(){
@@ -88,5 +96,13 @@ public class QuoteServiceImpl implements QuoteService {
     @Override
     public void deleteQuote(Long id) {
         repo.deleteById(id);
+    }
+
+    @Override
+    public void sendQuoteMessage(String id){
+        Map<String, String> messagemap = new HashMap<>();
+        messagemap.put("id", id);
+        logger.info("Sending the index request through queue message");
+        rabbitTemplate.convertAndSend(MessagingConfig.QUEUE_NAME, messagemap);
     }
 }

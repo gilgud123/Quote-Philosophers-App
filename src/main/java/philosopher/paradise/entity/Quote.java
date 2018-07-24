@@ -27,6 +27,10 @@ public class Quote {
     @JoinColumn(name = "PHILOSOPHER_ID")
     private Philosopher philosopher;
 
+    private boolean messageReceived;
+
+    private Integer messageCount = 0;
+
     public Quote() {this.id = new Random().nextLong()+10015;}
 
     public Quote(String text, Set<Topic> topics, Philosopher philosopher) {
@@ -34,5 +38,6 @@ public class Quote {
         this.text = text;
         this.topics = topics;
         this.philosopher = philosopher;
+        this.setMessageReceived(false);
     }
 }

@@ -57,6 +57,7 @@
             <hr>
 
             <form class="form-group" action="/quoteAdd" th:action="@{/quoteAdd}" method="post">
+                
                 <div class="form-group">
                     <label for="text">Add quote text:</label>
                     <input type="text" class="form-control" id="text" th:field="${quote.text}" />
