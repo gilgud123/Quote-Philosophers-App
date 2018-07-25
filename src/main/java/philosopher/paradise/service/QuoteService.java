@@ -24,6 +24,4 @@ public interface QuoteService {
     Quote updateQuote(Long is, String text);
 
     void deleteQuote(Long id);
-
-    void sendQuoteMessage(String id);
 }

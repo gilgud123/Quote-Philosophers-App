@@ -98,11 +98,4 @@ public class QuoteServiceImpl implements QuoteService {
         repo.deleteById(id);
     }
 
-    @Override
-    public void sendQuoteMessage(String id){
-        Map<String, String> messagemap = new HashMap<>();
-        messagemap.put("id", id);
-        logger.info("Sending the index request through queue message");
-        rabbitTemplate.convertAndSend(MessagingConfig.QUEUE_NAME, messagemap);
-    }
 }
